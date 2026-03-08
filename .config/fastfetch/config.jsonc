@@ -6,17 +6,21 @@
     "os",
     "packages",
     "shell",
+    "display",
     "wm",
     "terminal",
     "terminalfont",
     "cpu",
     "memory",
-    "locale"
+    "locale",
+    "break",
+    "colors"
   ],
   "logo": {
 	  "type": "small",
+	  "position": "left",
 	  "padding": {
-	  	  "top": 2
+		  "top": 3
 	  }
   }
 }

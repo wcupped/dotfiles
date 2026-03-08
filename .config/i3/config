@@ -16,22 +16,27 @@ client.focused       #262626 #262626 #ffffff #262626 #262626
 client.unfocused     #101010 #101010 #505050 #101010 #101010
 
 # autostarts
-#exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
+exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
 exec --no-startup-id pasystray
 exec --no-startup-id blueman-applet
 exec --no-startup-id pipewire &
 exec --no-startup-id pipewire-pulse &
 exec --no-startup-id wireplumber &
-exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/jdflag.png
-exec --no-startup-id nm-applet
+exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper.jpg
 #exec --no-startup-id xfsettingsd &
-exec --no-startup-id xdg-desktop-portal
+exec --no-startup-id /usr/libexec/xdg-desktop-portal-gtk
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
+exec --no-startup-id "xinput set-button-map 13 0 2 3 4 5 6 7 8 1"
 
 # main thing
 
 set $mod Mod4
+
+set $left j
+set $right semicolon
+set $up k
+set $down l
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -71,13 +76,15 @@ bindsym $mod+d exec dmenu_run
 bindsym $mod+Shift+d exec j4-dmenu-desktop
 
 bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -86,9 +93,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -153,7 +161,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-msg exit"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -196,11 +204,12 @@ bar {
 }
 
 bindsym $mod+z exec "boomer"
-bindsym --release $mod+Shift+l exec "slock"
-bindsym $mod+Shift+b exec $browser
+bindsym --release $mod+Ctrl+l exec "slock"
+bindsym $mod+b exec $browser
 bindsym $mod+Shift+f exec nemo
+
+for_window [class="^.*" window_type="normal"] border normal 2
 
 focus_follows_mouse no
 
 hide_edge_borders both
-
