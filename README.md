@@ -5,8 +5,4 @@ it's also optional to build a boomer util (https://github.com/tsoding/boomer.git
 
 do the ```git clone --depth 1 https://github.com/wcupped/dotfiles.git```
 then do the ```cd dotfiles```
-then ```cp -r ./.config/* ~/.config/```
-oh and also optionally do the ```cp ./etc/i3status.conf /etc/```
-to have a custom i3status config
-and optionally copy the zsh, p10k and oh my zsh configs:
-```cp ./.oh-my-zsh ./.zshrc ./.p10k.zsh ~/```
+then run `install.sh`
