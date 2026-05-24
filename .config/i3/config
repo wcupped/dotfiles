@@ -12,8 +12,8 @@
 # env variables
 set $browser firefox
 
-client.focused       #262626 #262626 #ffffff #262626 #262626
-client.unfocused     #101010 #101010 #505050 #101010 #101010
+client.focused       #000000 #000000 #ffffff #000000 #000000
+client.unfocused     #505050 #505050 #ffffff #505050 #505050
 
 # autostarts
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
@@ -23,20 +23,22 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id pipewire &
 exec --no-startup-id pipewire-pulse &
 exec --no-startup-id wireplumber &
-exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper.jpg
+exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper1.jpeg
 #exec --no-startup-id xfsettingsd &
 exec --no-startup-id /usr/libexec/xdg-desktop-portal-gtk
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
-exec --no-startup-id "xinput set-button-map 13 0 2 3 4 5 6 7 8 1"
+#exec --no-startup-id "xinput set-button-map 13 0 2 3 4 5 6 7 8 1"
+exec --no-startup-id brightnessctl set 100%
+exec --no-startup-id dhcpcd wlp0s20f3
 
 # main thing
 
 set $mod Mod4
 
-set $left j
-set $right semicolon
+set $left h
+set $right l
 set $up k
-set $down l
+set $down j
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -46,7 +48,7 @@ set $down l
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-font pango:Iosevka 10
+font pango:CaskaydiaMono Nerd Font 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -104,9 +106,6 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
 # split in vertical orientation
 bindsym $mod+v split v
 
@@ -163,6 +162,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-msg exit"
 
+bindsym XF86MonBrightnessUp exec "brightnessctl set +10%"
+bindsym XF86MonBrightnessDown exec "brightnessctl set 10%-"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -197,18 +199,20 @@ bar {
 
         colors {
             background #000000
-            active_workspace #262626 #262626 #FFFFFF
+            active_workspace #FFFFFF #FFFFFF #000000
             inactive_workspace #101010 #101010 #505050
-            focused_workspace #262626 #262626 #FFFFFF
+            focused_workspace #FFFFFF #FFFFFF #000000
         }
 }
 
 bindsym $mod+z exec "boomer"
 bindsym --release $mod+Ctrl+l exec "slock"
-bindsym $mod+b exec $browser
-bindsym $mod+Shift+f exec nemo
+bindsym $mod+Shift+b exec $browser
+bindsym $mod+Shift+f exec alacritty -e yazi
 
-for_window [class="^.*" window_type="normal"] border normal 2
+for_window [class="^.*"] border pixel 2
+gaps inner 5
+gaps outer 5
 
 focus_follows_mouse no
 

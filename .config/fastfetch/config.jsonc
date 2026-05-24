@@ -15,12 +15,5 @@
     "locale",
     "break",
     "colors"
-  ],
-  "logo": {
-	  "type": "small",
-	  "position": "left",
-	  "padding": {
-		  "top": 3
-	  }
-  }
+  ]
 }
