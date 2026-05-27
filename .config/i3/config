@@ -10,9 +10,9 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # env variables
-set $browser firefox
+set $browser qutebrowser
 
-client.focused       #000000 #000000 #ffffff #000000 #000000
+client.focused       #ffffff #ffffff #000000 #ffffff #ffffff
 client.unfocused     #505050 #505050 #ffffff #505050 #505050
 
 # autostarts
@@ -25,11 +25,10 @@ exec --no-startup-id pipewire-pulse &
 exec --no-startup-id wireplumber &
 exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/wallpaper1.jpeg
 #exec --no-startup-id xfsettingsd &
-exec --no-startup-id /usr/libexec/xdg-desktop-portal-gtk
+exec --no-startup-id /usr/libexec/xdg-desktop-portal
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
 #exec --no-startup-id "xinput set-button-map 13 0 2 3 4 5 6 7 8 1"
 exec --no-startup-id brightnessctl set 100%
-exec --no-startup-id dhcpcd wlp0s20f3
 
 # main thing
 
@@ -70,16 +69,20 @@ bindsym --release $mod+s exec scrot -s -f -z - | xclip -selection clipboard -t i
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn "CaskaydiaMono Nerd Font" -l 5 -nb "#000000" -nf "#ffffff" -sb "#ffffff" -sf "#000000" -p "drun:"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Shift+d exec j4-dmenu-desktop
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
+bindsym XF86AudioLoverWOlume exec amixer -q set Master 5%- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
 
 
 # change focus
@@ -162,9 +165,6 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-msg exit"
 
-bindsym XF86MonBrightnessUp exec "brightnessctl set +10%"
-bindsym XF86MonBrightnessDown exec "brightnessctl set 10%-"
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -173,16 +173,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym $right resize shrink width 10 px or 10 ppt
+        bindsym $up resize grow height 10 px or 10 ppt
+        bindsym $down resize shrink height 10 px or 10 ppt
+        bindsym $left resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Right resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"

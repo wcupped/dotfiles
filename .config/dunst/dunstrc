@@ -1,0 +1,8 @@
+[global]
+background = "#000000"
+foreground = "#ffffff"
+frame_color = "#ffffff"
+font = CaskaydiaMono Nerd Font 9
+progress_color = "#ffffff"
+progress_bg = "#000000"
+progress_border = "#ffffff"
